@@ -1,0 +1,54 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="container-fluid" style="margin-top:50px ;">
+    <div style="text-align: center;">
+        <h1 class="text-primary" >
+           Employee Management System 
+        </h1>
+        <a  class="btn btn-success" href="insert/">Insert</a>
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == "error" %}
+                    <div class="alert alert-danger">
+                        {{message}}
+                    </div>
+                {% else %}
+                    <div class="alert alert-{{message.tags}}">
+                        {{message}}
+                    </div>    
+                {% endif %}
+            {% endfor %}
+        {% endif %} 
+        <table class="table table-bordered" style="border: 2px solid black;">
+            <thead>
+                <tr>
+                    <th>S.no</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Designation</th>
+                    <th>Salary</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+        {% for mydata in data %}
+            <tbody>
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{mydata.name}}</td>
+                    <td>{{mydata.age}}</td>
+                    <td>{{mydata.designation}}</td>
+                    <td>{{mydata.salary}}</td>
+                    <td>{{mydata.email}}</td>
+                    <td>{{mydata.mobile}}</td>
+                    <td class="center text-center"><a class="btn btn-primary" href="update/{{mydata.id}}">Update</a></td>
+                    <td class="center text-center"><a class="btn btn-danger" href="delete/{{mydata.id}}">Delete</a></td>
+                </tr>
+            </tbody>
+        {% endfor %}    
+    </table>       
+    </div>
+</div>
+{% endblock %}
